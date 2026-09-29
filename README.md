@@ -1,5 +1,7 @@
 # ProofWeave
 
+[![CI](https://github.com/Duckweed-yhb/ProofWeave/actions/workflows/ci.yml/badge.svg)](https://github.com/Duckweed-yhb/ProofWeave/actions/workflows/ci.yml)
+
 **Reproducible supply-chain & partnership graph for NVIDIA — every relation scored, sourced, and traceable.**
 
 This repository is the deliverable for the ARTi R&D hiring challenge. It answers the prompt:
@@ -19,6 +21,75 @@ This repository is the deliverable for the ARTi R&D hiring challenge. It answers
 | **Out of scope** | Consumer-geography revenue splits, product-roadmap bets, non-public contract terms, any target price. |
 
 > **Disclaimer.** This snapshot is for research reproducibility. It is **not investment advice**.
+
+### At a glance
+
+```mermaid
+graph LR
+  NVDA((NVIDIA))
+
+  subgraph Suppliers
+    TSMC[TSMC]
+    SKH[SK Hynix]
+    MU[Micron]
+    SS[Samsung]
+    AMKR[Amkor]
+    FXA[Foxconn]
+    WST[Wistron]
+    FN[Fabrinet]
+  end
+
+  subgraph Customers
+    MSFT[Microsoft]
+    GOOG[Google]
+    ORCL[Oracle]
+    CRWV[CoreWeave]
+    META[Meta]
+    AMZN[Amazon AWS]
+  end
+
+  subgraph Investees
+    OAI[OpenAI]
+    ANTH[Anthropic]
+    MRVL[Marvell]
+    LITE[Lumentum]
+    COHR[Coherent]
+  end
+
+  subgraph Peers
+    AMD[AMD]
+    INTC[Intel]
+    AVGO[Broadcom]
+  end
+
+  TSMC -->|foundry| NVDA
+  SKH -->|HBM| NVDA
+  MU -->|HBM| NVDA
+  SS -->|memory/foundry| NVDA
+  AMKR -->|packaging| NVDA
+  FXA -->|assembly| NVDA
+  WST -->|assembly| NVDA
+  FN -->|assembly| NVDA
+
+  NVDA -->|GPUs| MSFT
+  NVDA -->|GPUs| GOOG
+  NVDA -->|GPUs| ORCL
+  NVDA -->|GPUs| CRWV
+  NVDA -->|GPUs| META
+  NVDA -.->|GPUs, inferred| AMZN
+
+  NVDA -->|equity| OAI
+  NVDA -->|equity| ANTH
+  NVDA -->|equity| MRVL
+  NVDA -->|equity| LITE
+  NVDA -->|equity| COHR
+
+  AMD <-.->|peer| NVDA
+  INTC <-.->|peer| NVDA
+  AVGO <-.->|peer| NVDA
+```
+
+Solid = `confirmed`; dashed = `inferred` / `peer`. Full edge list with scores is served at `/graph`.
 
 ## 2. Quick start
 
@@ -61,7 +132,8 @@ All endpoints read the on-disk snapshot; **no network calls are made at request 
 | Method | Path | What it does |
 |---|---|---|
 | GET | `/health` | Snapshot date, counts. |
-| GET | `/companies` | All company nodes. |
+| GET | `/stats` | One-shot aggregation: counts by relation_type / status, score buckets. |
+| GET | `/companies` | All company nodes (now including SEC CIK for US filers). |
 | GET | `/relationships` | Filter + paginate. Query params: `relation_type`, `status`, `direction`, `min_score`, `object_company`, `limit` (1-200), `offset`. |
 | GET | `/relationships/{id}` | Single relation with full evidence list. 404 if unknown. |
 | GET | `/graph` | Nodes + edges for visualisation. |

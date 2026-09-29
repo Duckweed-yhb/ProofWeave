@@ -62,6 +62,11 @@ class Company(BaseModel):
     exchange: Optional[str] = Field(
         default=None, description="e.g. 'NASDAQ', 'NYSE', 'TWSE', 'KRX'."
     )
+    cik: Optional[str] = Field(
+        default=None,
+        description="SEC EDGAR CIK (10-digit) for US-listed filers, so a reviewer "
+                    "can jump straight to https://www.sec.gov/edgar/browse/?CIK=<cik>.",
+    )
     is_listed: bool = True
     note: Optional[str] = None
 

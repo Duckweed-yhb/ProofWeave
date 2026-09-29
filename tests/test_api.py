@@ -15,6 +15,17 @@ def test_health():
     assert body["n_relationships"] > 10
 
 
+def test_stats():
+    r = client.get("/stats")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["n_relationships"] == client.get("/relationships").json()["total"]
+    assert set(body["by_relation_type"].keys()) >= {
+        "supplier", "customer", "partner", "investor_or_investee", "peer"
+    }
+    assert sum(body["score_buckets"].values()) == body["n_relationships"]
+
+
 def test_list_relationships_default():
     r = client.get("/relationships")
     assert r.status_code == 200

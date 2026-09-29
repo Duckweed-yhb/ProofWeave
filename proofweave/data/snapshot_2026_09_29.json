@@ -9,29 +9,29 @@
   "snapshot_date": "2026-09-29",
   "coverage_statement": "Publicly-listed companies related to NVIDIA as of 2026-09-29. Sources are limited to (a) SEC EDGAR filings, (b) NVIDIA/company official newsrooms and blogs, (c) established financial press. We do NOT bypass robots/paywalls/login. We deliberately leave 10-K anonymous customers as `unknown` rather than guessing. This snapshot is for research reproducibility, NOT investment advice.",
   "companies": {
-    "nvda":      {"id": "nvda", "name": "NVIDIA Corporation", "ticker": "NVDA", "exchange": "NASDAQ", "is_listed": true},
-    "tsmc":      {"id": "tsmc", "name": "Taiwan Semiconductor Manufacturing Co. Ltd.", "ticker": "TSM", "exchange": "NYSE (also TWSE:2330)", "is_listed": true},
+    "nvda":      {"id": "nvda", "name": "NVIDIA Corporation", "ticker": "NVDA", "exchange": "NASDAQ", "cik": "0001045810", "is_listed": true},
+    "tsmc":      {"id": "tsmc", "name": "Taiwan Semiconductor Manufacturing Co. Ltd.", "ticker": "TSM", "exchange": "NYSE (also TWSE:2330)", "is_listed": true, "note": "Foreign private issuer; files 20-F, not 10-K."},
     "samsung":   {"id": "samsung", "name": "Samsung Electronics Co. Ltd.", "ticker": "005930.KS", "exchange": "KRX", "is_listed": true},
     "sk_hynix":  {"id": "sk_hynix", "name": "SK Hynix Inc.", "ticker": "000660.KS", "exchange": "KRX", "is_listed": true},
-    "micron":    {"id": "micron", "name": "Micron Technology, Inc.", "ticker": "MU", "exchange": "NASDAQ", "is_listed": true},
+    "micron":    {"id": "micron", "name": "Micron Technology, Inc.", "ticker": "MU", "exchange": "NASDAQ", "cik": "0000723125", "is_listed": true},
     "hon_hai":   {"id": "hon_hai", "name": "Hon Hai Precision Industry Co. Ltd. (Foxconn)", "ticker": "2317.TW", "exchange": "TWSE", "is_listed": true},
     "wistron":   {"id": "wistron", "name": "Wistron Corporation", "ticker": "3231.TW", "exchange": "TWSE", "is_listed": true},
-    "fabrinet":  {"id": "fabrinet", "name": "Fabrinet", "ticker": "FN", "exchange": "NYSE", "is_listed": true},
-    "amkor":     {"id": "amkor", "name": "Amkor Technology, Inc.", "ticker": "AMKR", "exchange": "NASDAQ", "is_listed": true},
-    "microsoft": {"id": "microsoft", "name": "Microsoft Corporation", "ticker": "MSFT", "exchange": "NASDAQ", "is_listed": true},
-    "alphabet":  {"id": "alphabet", "name": "Alphabet Inc. (Google Cloud)", "ticker": "GOOGL", "exchange": "NASDAQ", "is_listed": true},
-    "oracle":    {"id": "oracle", "name": "Oracle Corporation", "ticker": "ORCL", "exchange": "NYSE", "is_listed": true},
-    "coreweave": {"id": "coreweave", "name": "CoreWeave, Inc.", "ticker": "CRWV", "exchange": "NASDAQ", "is_listed": true},
-    "meta":      {"id": "meta", "name": "Meta Platforms, Inc.", "ticker": "META", "exchange": "NASDAQ", "is_listed": true},
-    "amazon":    {"id": "amazon", "name": "Amazon.com, Inc. (AWS)", "ticker": "AMZN", "exchange": "NASDAQ", "is_listed": true},
-    "marvell":   {"id": "marvell", "name": "Marvell Technology, Inc.", "ticker": "MRVL", "exchange": "NASDAQ", "is_listed": true},
-    "lumentum":  {"id": "lumentum", "name": "Lumentum Holdings Inc.", "ticker": "LITE", "exchange": "NASDAQ", "is_listed": true},
-    "coherent":  {"id": "coherent", "name": "Coherent Corp.", "ticker": "COHR", "exchange": "NYSE", "is_listed": true},
+    "fabrinet":  {"id": "fabrinet", "name": "Fabrinet", "ticker": "FN", "exchange": "NYSE", "cik": "0001328590", "is_listed": true},
+    "amkor":     {"id": "amkor", "name": "Amkor Technology, Inc.", "ticker": "AMKR", "exchange": "NASDAQ", "cik": "0000830474", "is_listed": true},
+    "microsoft": {"id": "microsoft", "name": "Microsoft Corporation", "ticker": "MSFT", "exchange": "NASDAQ", "cik": "0000789019", "is_listed": true},
+    "alphabet":  {"id": "alphabet", "name": "Alphabet Inc. (Google Cloud)", "ticker": "GOOGL", "exchange": "NASDAQ", "cik": "0001652044", "is_listed": true},
+    "oracle":    {"id": "oracle", "name": "Oracle Corporation", "ticker": "ORCL", "exchange": "NYSE", "cik": "0001341439", "is_listed": true},
+    "coreweave": {"id": "coreweave", "name": "CoreWeave, Inc.", "ticker": "CRWV", "exchange": "NASDAQ", "cik": "0001997062", "is_listed": true},
+    "meta":      {"id": "meta", "name": "Meta Platforms, Inc.", "ticker": "META", "exchange": "NASDAQ", "cik": "0001326801", "is_listed": true},
+    "amazon":    {"id": "amazon", "name": "Amazon.com, Inc. (AWS)", "ticker": "AMZN", "exchange": "NASDAQ", "cik": "0001018724", "is_listed": true},
+    "marvell":   {"id": "marvell", "name": "Marvell Technology, Inc.", "ticker": "MRVL", "exchange": "NASDAQ", "cik": "0001835632", "is_listed": true},
+    "lumentum":  {"id": "lumentum", "name": "Lumentum Holdings Inc.", "ticker": "LITE", "exchange": "NASDAQ", "cik": "0001628395", "is_listed": true},
+    "coherent":  {"id": "coherent", "name": "Coherent Corp.", "ticker": "COHR", "exchange": "NYSE", "cik": "0000711376", "is_listed": true},
     "openai":    {"id": "openai", "name": "OpenAI", "is_listed": false, "note": "Private company; NVIDIA holds equity."},
     "anthropic": {"id": "anthropic", "name": "Anthropic PBC", "is_listed": false, "note": "Private company; NVIDIA holds up to $10B commitment."},
-    "amd":       {"id": "amd", "name": "Advanced Micro Devices, Inc.", "ticker": "AMD", "exchange": "NASDAQ", "is_listed": true},
-    "intel":     {"id": "intel", "name": "Intel Corporation", "ticker": "INTC", "exchange": "NASDAQ", "is_listed": true},
-    "broadcom":  {"id": "broadcom", "name": "Broadcom Inc.", "ticker": "AVGO", "exchange": "NASDAQ", "is_listed": true}
+    "amd":       {"id": "amd", "name": "Advanced Micro Devices, Inc.", "ticker": "AMD", "exchange": "NASDAQ", "cik": "0000002488", "is_listed": true},
+    "intel":     {"id": "intel", "name": "Intel Corporation", "ticker": "INTC", "exchange": "NASDAQ", "cik": "0000050863", "is_listed": true},
+    "broadcom":  {"id": "broadcom", "name": "Broadcom Inc.", "ticker": "AVGO", "exchange": "NASDAQ", "cik": "0001730168", "is_listed": true}
   },
   "relationships": [
     {
@@ -344,6 +344,46 @@
         }
       ],
       "uncertainty_note": "Single secondary source; treat as inferred, not confirmed."
+    },
+    {
+      "id": "nvda-google-partner",
+      "subject": "nvda",
+      "object_company": "alphabet",
+      "relation_type": "partner",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Separately from buying GPUs, NVIDIA and Google Cloud co-engineer a full-stack AI platform (libraries, frameworks, cloud services); >10-year collaboration per NVIDIA blog.",
+      "evidence": [
+        {
+          "url": "https://blogs.nvidia.com/blog/google-cloud-agentic-physical-ai-factories/",
+          "publisher": "NVIDIA Blog",
+          "published_at": "2026-04-22",
+          "accessed_at": "2026-09-29",
+          "locator": "Post lead paragraph",
+          "quote": "NVIDIA and Google Cloud have collaborated for more than a decade, co-engineering a full-stack AI platform ..."
+        }
+      ]
+    },
+    {
+      "id": "nvda-microsoft-partner",
+      "subject": "nvda",
+      "object_company": "microsoft",
+      "relation_type": "partner",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Beyond Azure being a customer, Microsoft and NVIDIA co-engineer tightly optimized Azure + NVIDIA Rubin systems for next-gen cloud AI.",
+      "evidence": [
+        {
+          "url": "https://nvidianews.nvidia.com/_gallery/download_pdf/695c39b23d633240d175d8e6/",
+          "publisher": "NVIDIA Newsroom",
+          "published_at": "2026-01-06",
+          "accessed_at": "2026-09-29",
+          "locator": "Press release PDF",
+          "quote": "Microsoft Azure will offer a tightly optimized platform enabling customers to accelerate innovation ..."
+        }
+      ]
     },
     {
       "id": "nvda-openai-investee",

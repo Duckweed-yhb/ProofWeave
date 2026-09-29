@@ -12,12 +12,9 @@ def test_snapshot_loads(snap):
 def test_at_least_five_relation_types_covered(snap):
     types = {r.relation_type for r in snap.relationships}
     # Challenge requires supplier, customer, partner, investor_or_investee, peer.
-    # We don't ship a separate 'partner' row because partner is folded into
-    # the customer rows for cloud hyperscalers; we still cover all 5 enum values
-    # across the graph.
-    expected = {RelationType.supplier, RelationType.customer,
+    expected = {RelationType.supplier, RelationType.customer, RelationType.partner,
                 RelationType.investor_or_investee, RelationType.peer}
-    assert expected.issubset(types)
+    assert expected.issubset(types), f"missing types: {expected - types}"
 
 
 def test_every_relationship_has_score_in_range(snap):

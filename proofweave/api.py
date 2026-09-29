@@ -46,6 +46,34 @@ def health():
             "n_companies": len(snap.companies)}
 
 
+@app.get("/stats")
+def stats(snap: Snapshot = Depends(get_snapshot)):
+    """One-shot aggregation: counts by relation_type, status, and score bucket."""
+    by_type: dict[str, int] = {}
+    by_status: dict[str, int] = {}
+    score_buckets = {"0-39": 0, "40-69": 0, "70-89": 0, "90-100": 0}
+    for r in snap.relationships:
+        by_type[r.relation_type.value] = by_type.get(r.relation_type.value, 0) + 1
+        by_status[r.status.value] = by_status.get(r.status.value, 0) + 1
+        s = r.score.total if r.score else 0
+        if s < 40:
+            score_buckets["0-39"] += 1
+        elif s < 70:
+            score_buckets["40-69"] += 1
+        elif s < 90:
+            score_buckets["70-89"] += 1
+        else:
+            score_buckets["90-100"] += 1
+    return {
+        "snapshot_date": str(snap.snapshot_date),
+        "n_relationships": len(snap.relationships),
+        "n_companies": len(snap.companies),
+        "by_relation_type": by_type,
+        "by_status": by_status,
+        "score_buckets": score_buckets,
+    }
+
+
 @app.get("/companies")
 def list_companies(snap: Snapshot = Depends(get_snapshot)):
     return snap.companies
