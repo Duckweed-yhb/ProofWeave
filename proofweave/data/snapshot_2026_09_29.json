@@ -1,0 +1,528 @@
+{
+  "subject": {
+    "id": "nvda",
+    "name": "NVIDIA Corporation",
+    "ticker": "NVDA",
+    "exchange": "NASDAQ",
+    "is_listed": true
+  },
+  "snapshot_date": "2026-09-29",
+  "coverage_statement": "Publicly-listed companies related to NVIDIA as of 2026-09-29. Sources are limited to (a) SEC EDGAR filings, (b) NVIDIA/company official newsrooms and blogs, (c) established financial press. We do NOT bypass robots/paywalls/login. We deliberately leave 10-K anonymous customers as `unknown` rather than guessing. This snapshot is for research reproducibility, NOT investment advice.",
+  "companies": {
+    "nvda":      {"id": "nvda", "name": "NVIDIA Corporation", "ticker": "NVDA", "exchange": "NASDAQ", "is_listed": true},
+    "tsmc":      {"id": "tsmc", "name": "Taiwan Semiconductor Manufacturing Co. Ltd.", "ticker": "TSM", "exchange": "NYSE (also TWSE:2330)", "is_listed": true},
+    "samsung":   {"id": "samsung", "name": "Samsung Electronics Co. Ltd.", "ticker": "005930.KS", "exchange": "KRX", "is_listed": true},
+    "sk_hynix":  {"id": "sk_hynix", "name": "SK Hynix Inc.", "ticker": "000660.KS", "exchange": "KRX", "is_listed": true},
+    "micron":    {"id": "micron", "name": "Micron Technology, Inc.", "ticker": "MU", "exchange": "NASDAQ", "is_listed": true},
+    "hon_hai":   {"id": "hon_hai", "name": "Hon Hai Precision Industry Co. Ltd. (Foxconn)", "ticker": "2317.TW", "exchange": "TWSE", "is_listed": true},
+    "wistron":   {"id": "wistron", "name": "Wistron Corporation", "ticker": "3231.TW", "exchange": "TWSE", "is_listed": true},
+    "fabrinet":  {"id": "fabrinet", "name": "Fabrinet", "ticker": "FN", "exchange": "NYSE", "is_listed": true},
+    "amkor":     {"id": "amkor", "name": "Amkor Technology, Inc.", "ticker": "AMKR", "exchange": "NASDAQ", "is_listed": true},
+    "microsoft": {"id": "microsoft", "name": "Microsoft Corporation", "ticker": "MSFT", "exchange": "NASDAQ", "is_listed": true},
+    "alphabet":  {"id": "alphabet", "name": "Alphabet Inc. (Google Cloud)", "ticker": "GOOGL", "exchange": "NASDAQ", "is_listed": true},
+    "oracle":    {"id": "oracle", "name": "Oracle Corporation", "ticker": "ORCL", "exchange": "NYSE", "is_listed": true},
+    "coreweave": {"id": "coreweave", "name": "CoreWeave, Inc.", "ticker": "CRWV", "exchange": "NASDAQ", "is_listed": true},
+    "meta":      {"id": "meta", "name": "Meta Platforms, Inc.", "ticker": "META", "exchange": "NASDAQ", "is_listed": true},
+    "amazon":    {"id": "amazon", "name": "Amazon.com, Inc. (AWS)", "ticker": "AMZN", "exchange": "NASDAQ", "is_listed": true},
+    "marvell":   {"id": "marvell", "name": "Marvell Technology, Inc.", "ticker": "MRVL", "exchange": "NASDAQ", "is_listed": true},
+    "lumentum":  {"id": "lumentum", "name": "Lumentum Holdings Inc.", "ticker": "LITE", "exchange": "NASDAQ", "is_listed": true},
+    "coherent":  {"id": "coherent", "name": "Coherent Corp.", "ticker": "COHR", "exchange": "NYSE", "is_listed": true},
+    "openai":    {"id": "openai", "name": "OpenAI", "is_listed": false, "note": "Private company; NVIDIA holds equity."},
+    "anthropic": {"id": "anthropic", "name": "Anthropic PBC", "is_listed": false, "note": "Private company; NVIDIA holds up to $10B commitment."},
+    "amd":       {"id": "amd", "name": "Advanced Micro Devices, Inc.", "ticker": "AMD", "exchange": "NASDAQ", "is_listed": true},
+    "intel":     {"id": "intel", "name": "Intel Corporation", "ticker": "INTC", "exchange": "NASDAQ", "is_listed": true},
+    "broadcom":  {"id": "broadcom", "name": "Broadcom Inc.", "ticker": "AVGO", "exchange": "NASDAQ", "is_listed": true}
+  },
+  "relationships": [
+    {
+      "id": "nvda-tsmc-foundry",
+      "subject": "nvda",
+      "object_company": "tsmc",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "TSMC manufactures NVIDIA GPUs on leading nodes; named directly in NVIDIA FY2026 10-K.",
+      "quantitative_note": "TSMC ~19% of 2025 revenue from NVIDIA (third-party estimate, not in 10-K).",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing",
+          "quote": "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics ... to produce our semiconductor wafers."
+        }
+      ]
+    },
+    {
+      "id": "nvda-samsung-foundry-memory",
+      "subject": "nvda",
+      "object_company": "samsung",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Samsung is both a secondary foundry supplier and one of three HBM memory suppliers, named in 10-K.",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing",
+          "quote": "We purchase memory from SK Hynix Inc., Micron Technology, Inc., and Samsung."
+        }
+      ]
+    },
+    {
+      "id": "nvda-skhynix-hbm",
+      "subject": "nvda",
+      "object_company": "sk_hynix",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "SK Hynix named as HBM memory supplier in 10-K; widely reported as the largest HBM supplier for NVIDIA.",
+      "quantitative_note": "Analyst estimates SK Hynix holds ~50-60% of NVIDIA HBM4 allocation (NOT published by NVIDIA).",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing",
+          "quote": "We purchase memory from SK Hynix Inc., Micron Technology, Inc., and Samsung."
+        },
+        {
+          "url": "https://www.ctol.digital/news/hbm-market-shift-samsung-rises-hynix-lead-narrows/",
+          "publisher": "CTOL / Counterpoint Research",
+          "published_at": "2026-09-03",
+          "accessed_at": "2026-09-29",
+          "locator": "Article body",
+          "quote": "NVIDIA's June GTC Taipei presentation explicitly identified HBM4 from Micron, SK hynix and Samsung for Vera Rubin."
+        }
+      ],
+      "uncertainty_note": "Per-vendor allocation split is analyst estimate; NVIDIA has not published numbers."
+    },
+    {
+      "id": "nvda-micron-hbm",
+      "subject": "nvda",
+      "object_company": "micron",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Micron named as HBM supplier in 10-K and on-stage at GTC Taipei 2026.",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing"
+        }
+      ]
+    },
+    {
+      "id": "nvda-foxconn-cm",
+      "subject": "nvda",
+      "object_company": "hon_hai",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Hon Hai (Foxconn) named as contract manufacturer for final assembly/testing in 10-K.",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing",
+          "quote": "We engage with independent subcontractors and contract manufacturers such as Hon Hai Precision Industry Co., Ltd., Wistron Corporation, and Fabrinet..."
+        }
+      ]
+    },
+    {
+      "id": "nvda-wistron-cm",
+      "subject": "nvda",
+      "object_company": "wistron",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Wistron named as contract manufacturer in 10-K.",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing"
+        }
+      ]
+    },
+    {
+      "id": "nvda-fabrinet-cm",
+      "subject": "nvda",
+      "object_company": "fabrinet",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Fabrinet named as contract manufacturer in 10-K.",
+      "evidence": [
+        {
+          "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001045810/e361e58a-7483-44f5-bc62-a9080ae6ec72.pdf",
+          "publisher": "NVIDIA FY2026 Form 10-K (SEC EDGAR)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Item 1, Business - Manufacturing"
+        }
+      ]
+    },
+    {
+      "id": "nvda-amkor-packaging",
+      "subject": "nvda",
+      "object_company": "amkor",
+      "relation_type": "supplier",
+      "direction": "inbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Amkor announced a strategic multi-year advanced packaging & test partnership with NVIDIA for AI infrastructure (June 2026).",
+      "evidence": [
+        {
+          "url": "https://amkor.com/",
+          "publisher": "Amkor Technology official site",
+          "published_at": "2026-06-08",
+          "accessed_at": "2026-09-29",
+          "locator": "Homepage featured press release",
+          "quote": "Amkor and NVIDIA Announce Strategic Partnership for AI Infrastructure."
+        },
+        {
+          "url": "https://www.nasdaq.com/articles/amkor-technology-q2-earnings-call-highlights",
+          "publisher": "Nasdaq / Amkor Q2 FY2026 earnings call coverage",
+          "published_at": "2026-07-27",
+          "accessed_at": "2026-09-29",
+          "locator": "Article body"
+        }
+      ]
+    },
+    {
+      "id": "nvda-microsoft-customer",
+      "subject": "nvda",
+      "object_company": "microsoft",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Microsoft Azure is a named NVIDIA cloud partner; Azure will offer NVIDIA Rubin. Confirmed in NVIDIA newsroom.",
+      "evidence": [
+        {
+          "url": "https://nvidianews.nvidia.com/_gallery/download_pdf/695c39b23d633240d175d8e6/",
+          "publisher": "NVIDIA Newsroom",
+          "published_at": "2026-01-06",
+          "accessed_at": "2026-09-29",
+          "locator": "Press release PDF",
+          "quote": "The Rubin platform will provide the foundation for Microsoft's next-generation cloud AI capabilities."
+        }
+      ]
+    },
+    {
+      "id": "nvda-google-customer-partner",
+      "subject": "nvda",
+      "object_company": "alphabet",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Google Cloud is a long-standing NVIDIA cloud partner and co-engineered platform; NVIDIA also cites Alphabet as a customer in the 2026 Annual Review.",
+      "evidence": [
+        {
+          "url": "https://cloud.google.com/blog/products/compute/google-cloud-ai-infrastructure-at-nvidia-gtc-2026",
+          "publisher": "Google Cloud Blog",
+          "published_at": "2026-03-17",
+          "accessed_at": "2026-09-29",
+          "locator": "GTC 2026 announcement post"
+        },
+        {
+          "url": "https://blogs.nvidia.com/blog/google-cloud-agentic-physical-ai-factories/",
+          "publisher": "NVIDIA Blog",
+          "published_at": "2026-04-22",
+          "accessed_at": "2026-09-29",
+          "locator": "Post body"
+        }
+      ],
+      "uncertainty_note": "Google is simultaneously a competitor via its TPU; we list the customer relationship on official evidence only."
+    },
+    {
+      "id": "nvda-oracle-customer",
+      "subject": "nvda",
+      "object_company": "oracle",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Oracle OCI Supercluster adopts NVIDIA Grace Blackwell and DGX Cloud; official press release.",
+      "evidence": [
+        {
+          "url": "https://nvidianews.nvidia.com/_gallery/download_pdf/65f879573d6332ddce3719f6/",
+          "publisher": "NVIDIA Newsroom",
+          "published_at": "2025-03-18",
+          "accessed_at": "2026-09-29",
+          "locator": "Press release PDF",
+          "quote": "Oracle adopts NVIDIA Grace Blackwell across OCI Supercluster, OCI Compute, and NVIDIA DGX Cloud on OCI."
+        }
+      ]
+    },
+    {
+      "id": "nvda-coreweave-customer-investee",
+      "subject": "nvda",
+      "object_company": "coreweave",
+      "relation_type": "customer",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "CoreWeave is both a major AI-cloud customer (integrating Rubin from 2H 2026) AND a company NVIDIA has invested in via convertible notes.",
+      "quantitative_note": "NVIDIA committed ~$2B convertible to CoreWeave (2024-2025 round).",
+      "evidence": [
+        {
+          "url": "https://nvidianews.nvidia.com/_gallery/download_pdf/695c39b23d633240d175d8e6/",
+          "publisher": "NVIDIA Newsroom",
+          "published_at": "2026-01-06",
+          "accessed_at": "2026-09-29",
+          "locator": "Press release PDF",
+          "quote": "CoreWeave will integrate NVIDIA Rubin-based systems into its AI cloud platform beginning in the second half of 2026."
+        },
+        {
+          "url": "https://www.peony.ink/blog/chip-investors",
+          "publisher": "Peony.ink (industry roundup)",
+          "published_at": "2026-05-15",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA investments paragraph",
+          "quote": "NVIDIA / NVentures ($45.3B equity AI deals 2026 YTD, including $30B OpenAI, $2B CoreWeave, $2B Marvell ...)."
+        }
+      ]
+    },
+    {
+      "id": "nvda-meta-customer",
+      "subject": "nvda",
+      "object_company": "meta",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Meta named as a customer in NVIDIA's 2026 Annual Review alongside other model builders.",
+      "evidence": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-annual-report-web-Hyperlinks.pdf",
+          "publisher": "NVIDIA 2026 Annual Review",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "Letter to shareholders",
+          "quote": "we have received additional purchase orders and further diversified our customer base, including Anthropic, Meta, and a growing set of world-class model builders ..."
+        }
+      ]
+    },
+    {
+      "id": "nvda-amazon-customer",
+      "subject": "nvda",
+      "object_company": "amazon",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "inferred",
+      "as_of": "2026-09-29",
+      "rationale": "AWS is widely reported as one of NVIDIA's largest AI customers, but NVIDIA does not name AWS in 10-K; AWS also sells competing Trainium chips.",
+      "evidence": [
+        {
+          "url": "https://infotechlead.com/networking/nvidias-biggest-ai-customers-in-2026-aws-meta-microsoft-and-openai-drive-gpu-boom-98443",
+          "publisher": "InfotechLead",
+          "published_at": "2026-09-24",
+          "accessed_at": "2026-09-29",
+          "locator": "Article body"
+        }
+      ],
+      "uncertainty_note": "Single secondary source; treat as inferred, not confirmed."
+    },
+    {
+      "id": "nvda-openai-investee",
+      "subject": "nvda",
+      "object_company": "openai",
+      "relation_type": "investor_or_investee",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "NVIDIA has committed ~$30B to OpenAI as part of 2026 AI-infrastructure investments.",
+      "quantitative_note": "Up to ~$30B total commitment (2026, industry roundups).",
+      "evidence": [
+        {
+          "url": "https://www.peony.ink/blog/chip-investors",
+          "publisher": "Peony.ink (industry roundup)",
+          "published_at": "2026-05-15",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA investments paragraph"
+        }
+      ]
+    },
+    {
+      "id": "nvda-anthropic-investee",
+      "subject": "nvda",
+      "object_company": "anthropic",
+      "relation_type": "investor_or_investee",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "NVIDIA committed up to $10B to Anthropic (Nov 2025) with a deep technology partnership.",
+      "quantitative_note": "Up to $10B NVIDIA commitment (Nov 2025).",
+      "evidence": [
+        {
+          "url": "https://aifundingtracker.com/nvidia-startup-investments/",
+          "publisher": "AI Funding Tracker",
+          "published_at": "2026-07-03",
+          "accessed_at": "2026-09-29",
+          "locator": "Anthropic section",
+          "quote": "Anthropic: $10 Billion Investment (November 2025) ... Nvidia commitment: up to $10 billion ..."
+        }
+      ]
+    },
+    {
+      "id": "nvda-marvell-investee",
+      "subject": "nvda",
+      "object_company": "marvell",
+      "relation_type": "investor_or_investee",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "NVIDIA made a ~$2B strategic investment in Marvell (2026). Marvell is also a peer in custom AI silicon.",
+      "quantitative_note": "~$2B NVIDIA investment (2026).",
+      "evidence": [
+        {
+          "url": "https://www.peony.ink/blog/chip-investors",
+          "publisher": "Peony.ink (industry roundup)",
+          "published_at": "2026-05-15",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA investments paragraph"
+        }
+      ],
+      "uncertainty_note": "Marvell overlaps as a peer; peer relation captured separately."
+    },
+    {
+      "id": "nvda-lumentum-investee",
+      "subject": "nvda",
+      "object_company": "lumentum",
+      "relation_type": "investor_or_investee",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "NVIDIA made a ~$2B strategic investment in Lumentum (optical interconnect), 2026.",
+      "evidence": [
+        {
+          "url": "https://www.peony.ink/blog/chip-investors",
+          "publisher": "Peony.ink (industry roundup)",
+          "published_at": "2026-05-15",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA investments paragraph"
+        }
+      ]
+    },
+    {
+      "id": "nvda-coherent-investee",
+      "subject": "nvda",
+      "object_company": "coherent",
+      "relation_type": "investor_or_investee",
+      "direction": "outbound",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "NVIDIA made a ~$2B strategic investment in Coherent (photonics/optics), 2026.",
+      "evidence": [
+        {
+          "url": "https://www.peony.ink/blog/chip-investors",
+          "publisher": "Peony.ink (industry roundup)",
+          "published_at": "2026-05-15",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA investments paragraph"
+        }
+      ]
+    },
+    {
+      "id": "nvda-amd-peer",
+      "subject": "nvda",
+      "object_company": "amd",
+      "relation_type": "peer",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "AMD is the most direct public-company competitor in data-center AI GPUs (Instinct vs H100/B200/Rubin).",
+      "evidence": [
+        {
+          "url": "https://valuechain.wiki/nvidia?lang=en",
+          "publisher": "ValueChain.wiki",
+          "published_at": "2026-09-24",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA overview"
+        }
+      ]
+    },
+    {
+      "id": "nvda-intel-peer",
+      "subject": "nvda",
+      "object_company": "intel",
+      "relation_type": "peer",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Intel competes in data-center accelerators (Gaudi) and CPUs adjacent to NVIDIA's data-center franchise.",
+      "evidence": [
+        {
+          "url": "https://valuechain.wiki/nvidia?lang=en",
+          "publisher": "ValueChain.wiki",
+          "published_at": "2026-09-24",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA overview"
+        }
+      ]
+    },
+    {
+      "id": "nvda-broadcom-peer",
+      "subject": "nvda",
+      "object_company": "broadcom",
+      "relation_type": "peer",
+      "direction": "both",
+      "status": "confirmed",
+      "as_of": "2026-09-29",
+      "rationale": "Broadcom competes in AI networking (Tomahawk/Jericho) and custom AI accelerators (TPU, others).",
+      "evidence": [
+        {
+          "url": "https://valuechain.wiki/nvidia?lang=en",
+          "publisher": "ValueChain.wiki",
+          "published_at": "2026-09-24",
+          "accessed_at": "2026-09-29",
+          "locator": "NVIDIA overview"
+        }
+      ]
+    },
+    {
+      "id": "nvda-anonymous-top-customers",
+      "subject": "nvda",
+      "object_company": "unknown",
+      "relation_type": "customer",
+      "direction": "outbound",
+      "status": "unknown",
+      "as_of": "2026-09-29",
+      "rationale": "10-K R14 discloses three direct customers accounting for 30%, 18% and 1x% of revenue, but does NOT name them. We deliberately do not guess (common misattribution: assuming the 30% customer is Microsoft).",
+      "quantitative_note": "30% / 18% / ~1x% of direct-channel revenue, FY2026 (10-K R14).",
+      "evidence": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/R14.htm",
+          "publisher": "NVIDIA 10-K (SEC EDGAR, R-balance-sheet components)",
+          "published_at": "2026-02-25",
+          "accessed_at": "2026-09-29",
+          "locator": "R14 - Concentration of credit risk",
+          "quote": "Three direct customers accounted for 30%, 18%, and 1[?]% ... of revenue."
+        }
+      ],
+      "uncertainty_note": "By design, this row stays `unknown`. Do not infer identities."
+    }
+  ]
+}
