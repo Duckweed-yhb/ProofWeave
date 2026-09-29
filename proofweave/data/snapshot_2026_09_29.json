@@ -31,7 +31,8 @@
     "anthropic": {"id": "anthropic", "name": "Anthropic PBC", "is_listed": false, "note": "Private company; NVIDIA holds up to $10B commitment."},
     "amd":       {"id": "amd", "name": "Advanced Micro Devices, Inc.", "ticker": "AMD", "exchange": "NASDAQ", "cik": "0000002488", "is_listed": true},
     "intel":     {"id": "intel", "name": "Intel Corporation", "ticker": "INTC", "exchange": "NASDAQ", "cik": "0000050863", "is_listed": true},
-    "broadcom":  {"id": "broadcom", "name": "Broadcom Inc.", "ticker": "AVGO", "exchange": "NASDAQ", "cik": "0001730168", "is_listed": true}
+    "broadcom":  {"id": "broadcom", "name": "Broadcom Inc.", "ticker": "AVGO", "exchange": "NASDAQ", "cik": "0001730168", "is_listed": true},
+    "unknown":   {"id": "unknown", "name": "Anonymous direct customers (10-K R14, NOT named by NVIDIA)", "is_listed": false, "note": "Synthetic node: the three anonymous customers at 30% / 18% / ~1x% of revenue. We refuse to guess identities."}
   },
   "relationships": [
     {

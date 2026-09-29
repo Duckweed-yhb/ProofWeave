@@ -19,7 +19,7 @@ This repository is the deliverable for the ARTi R&D hiring challenge. It answers
 | **Ticker / exchange** | NVDA · NASDAQ |
 | **Snapshot date** | **2026-09-29** |
 | **Primary filings used** | NVIDIA FY2026 Form 10-K (filed 2026-02-25, period ended 2026-01), NVIDIA Q2 FY2027 10-Q (period ended 2026-07-26) |
-| **Coverage** | 23 listed (and 2 private) counterparties, 25 relationships across `supplier / customer / partner / investor_or_investee / peer` |
+| **Coverage** | 23 company nodes (21 listed + 2 private + 1 synthetic "anonymous customer" node), 25 relationships across `supplier / customer / partner / investor_or_investee / peer` |
 | **Out of scope** | Consumer-geography revenue splits, product-roadmap bets, non-public contract terms, any target price. |
 
 > **Disclaimer.** This snapshot is for research reproducibility. It is **not investment advice**.

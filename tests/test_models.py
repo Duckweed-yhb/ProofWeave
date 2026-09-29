@@ -40,6 +40,14 @@ def test_anonymous_customers_stay_unknown(snap):
 
 
 def test_all_object_companies_exist(snap):
-    ids = set(snap.companies.keys()) | {"unknown"}
+    ids = set(snap.companies.keys())
     for r in snap.relationships:
         assert r.object_company in ids, f"{r.id} references unknown company {r.object_company}"
+
+
+def test_graph_has_no_dangling_edges(snap):
+    """Every edge target/source must resolve to a node (no dangling refs)."""
+    ids = set(snap.companies.keys())
+    for r in snap.relationships:
+        assert r.subject in ids
+        assert r.object_company in ids
