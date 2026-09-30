@@ -19,4 +19,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install --upgrade pip
       - run: pip install -e ".[dev]"
-      - run: pytest -q
+      - name: Lint
+        run: ruff check .
+      - name: Tests
+        run: pytest -q
+      - name: Audit the shipped snapshot
+        # Fails the build if the snapshot stops being internally consistent --
+        # a hand-typed score, a dangling edge, or a scoring term that has
+        # silently stopped discriminating.
+        run: proofweave audit

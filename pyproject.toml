@@ -4,7 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "proofweave"
-version = "0.1.0"
+# Version is single-sourced from proofweave/__init__.py -- see
+# [tool.setuptools.dynamic] below.  Keep it out of this file so the package and
+# the metadata can never disagree.
+dynamic = ["version"]
 description = "Reproducible supply-chain & partnership graph for NVIDIA — every relation scored, sourced, and traceable."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -20,13 +23,34 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "httpx>=0.27",
+    "ruff>=0.6",
 ]
 
 [project.scripts]
 proofweave = "proofweave.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/Duckweed-yhb/ProofWeave"
+Repository = "https://github.com/Duckweed-yhb/ProofWeave"
+Issues = "https://github.com/Duckweed-yhb/ProofWeave/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "proofweave.__version__" }
 
 [tool.setuptools.packages.find]
 include = ["proofweave*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+# The codebase wraps at 100 columns; keep the linter aligned with it rather
+# than reformatting working code to the 88-column default.
+line-length = 100
+
+[tool.ruff.lint]
+# Deliberately narrow: pycodestyle + pyflakes, which this tree passes today.
+# Wider families (I/UP/B/SIM) should be switched on together with a commit that
+# fixes what they report, not as a gate nobody has run.
+select = ["E", "F", "W"]

@@ -5,8 +5,11 @@ __pycache__/
 venv/
 .env
 .pytest_cache/
+.ruff_cache/
 *.egg-info/
 build/
 dist/
-.graph.json
 .DS_Store
+
+# Default output of `proofweave graph` (override with --out).
+graph.json
