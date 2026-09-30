@@ -97,3 +97,133 @@ def test_unknown_company_filter():
     r = client.get("/relationships", params={"object_company": "no-such-company"})
     assert r.status_code == 200
     assert r.json()["items"] == []
+
+
+# --- index / audit / staleness -----------------------------------------------
+
+
+def test_index_points_at_the_docs():
+    r = client.get("/")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["documentation"] == "/docs"
+    assert "/relationships" in body["endpoints"]
+
+
+def test_audit_reports_a_clean_snapshot():
+    r = client.get("/audit")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["ok"] is True
+    assert body["n_errors"] == 0
+    assert body["checks_run"] > 25
+
+
+def test_stale_endpoint():
+    r = client.get("/stale", params={"max_age_days": 0})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["n_stale"] == len(body["items"])
+    assert all(i["age_days"] > 0 for i in body["items"])
+    assert client.get("/stale", params={"max_age_days": 3650}).json()["n_stale"] == 0
+
+
+def test_stale_rejects_negative_age():
+    assert client.get("/stale", params={"max_age_days": -1}).status_code == 422
+
+
+# --- time-dimension filters --------------------------------------------------
+
+
+def test_max_age_days_filter():
+    r = client.get("/relationships", params={"max_age_days": 30})
+    assert r.status_code == 200
+    items = r.json()["items"]
+    assert items
+    assert all(i["score"]["evidence_age_days"] <= 30 for i in items)
+
+
+def test_published_after_filter():
+    r = client.get("/relationships", params={"published_after": "2026-06-01"})
+    assert r.status_code == 200
+    items = r.json()["items"]
+    assert items
+    assert all(i["score"]["newest_evidence_date"] >= "2026-06-01" for i in items)
+
+
+def test_future_cutoff_returns_nothing():
+    r = client.get("/relationships", params={"published_after": "2999-01-01"})
+    assert r.status_code == 200
+    assert r.json()["total"] == 0
+
+
+def test_malformed_date_is_rejected():
+    r = client.get("/relationships", params={"published_after": "yesterday"})
+    assert r.status_code == 422
+
+
+# --- traversal ---------------------------------------------------------------
+
+
+def test_neighbours_of_a_supplier():
+    r = client.get("/graph/neighbors/tsmc")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["hop_distances"] == {"tsmc": 0, "nvda": 1}
+    assert {n["id"] for n in body["nodes"]} == {"tsmc", "nvda"}
+    assert all(n["hop_distance"] <= body["hops"] for n in body["nodes"])
+
+
+def test_neighbours_two_hops_widens_the_subgraph():
+    one = client.get("/graph/neighbors/tsmc", params={"hops": 1}).json()
+    two = client.get("/graph/neighbors/tsmc", params={"hops": 2}).json()
+    assert len(two["nodes"]) > len(one["nodes"])
+
+
+def test_neighbours_404_for_unknown_company():
+    r = client.get("/graph/neighbors/no-such-company")
+    assert r.status_code == 404
+    assert "not found" in r.json()["detail"]
+
+
+def test_neighbours_rejects_hops_beyond_the_cap():
+    assert client.get("/graph/neighbors/nvda", params={"hops": 99}).status_code == 422
+    assert client.get("/graph/neighbors/nvda", params={"hops": 0}).status_code == 422
+
+
+def test_path_between_two_suppliers():
+    r = client.get("/graph/path", params={"source": "tsmc", "target": "micron"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["nodes"] == ["tsmc", "nvda", "micron"]
+    assert body["hops"] == 2
+    assert len(body["edges"]) == 2
+
+
+def test_path_to_self():
+    r = client.get("/graph/path", params={"source": "nvda", "target": "nvda"})
+    assert r.status_code == 200
+    assert r.json()["hops"] == 0
+
+
+def test_path_404_when_unreachable_within_max_hops():
+    r = client.get("/graph/path",
+                   params={"source": "tsmc", "target": "micron", "max_hops": 1})
+    assert r.status_code == 404
+
+
+def test_path_404_for_unknown_company():
+    assert client.get("/graph/path",
+                      params={"source": "nope", "target": "nvda"}).status_code == 404
+    assert client.get("/graph/path",
+                      params={"source": "nvda", "target": "nope"}).status_code == 404
+
+
+def test_path_requires_both_parameters():
+    assert client.get("/graph/path", params={"source": "nvda"}).status_code == 422
+
+
+def test_graph_path_is_not_shadowed_by_the_neighbors_route():
+    """Both live under /graph; neither may swallow the other."""
+    assert client.get("/graph/path", params={"source": "nvda", "target": "tsmc"}).status_code == 200
+    assert client.get("/graph/neighbors/nvda").status_code == 200
