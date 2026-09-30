@@ -51,3 +51,27 @@ def test_graph_has_no_dangling_edges(snap):
     for r in snap.relationships:
         assert r.subject in ids
         assert r.object_company in ids
+
+
+def test_recency_term_actually_discriminates(snap):
+    """Regression guard for a scoring term that had become a no-op.
+
+    The recency bonus used to be computed from `accessed_at`.  Every evidence
+    row in this snapshot was accessed on the snapshot date, so all 25
+    relationships scored the identical recency bonus and the term -- documented
+    in the README as 0/3/6/10 -- was silently constant.  If this test fails the
+    term has stopped measuring source freshness again.
+    """
+    bonuses = {r.score.recency_bonus for r in snap.relationships}
+    assert len(bonuses) > 1, (
+        "recency bonus is constant across every relationship; it is no longer "
+        f"measuring evidence freshness (values seen: {bonuses})"
+    )
+    # And the date it was measured against must be a real publication date,
+    # not the (uniform) snapshot access date.
+    for r in snap.relationships:
+        assert r.score.newest_evidence_date is not None, r.id
+        assert r.score.evidence_age_days == (
+            r.as_of - r.score.newest_evidence_date
+        ).days, r.id
+    assert all(r.score.newest_evidence_date <= r.as_of for r in snap.relationships)

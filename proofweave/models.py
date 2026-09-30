@@ -14,7 +14,19 @@ from datetime import date
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl
+
+
+class _Frozen(BaseModel):
+    """Base class for every model in this package.
+
+    A loaded snapshot is a deliverable that the API caches process-wide, so
+    in-place mutation would silently leak one request's edits into every later
+    request.  Freezing makes that a loud error instead.  Rebuild with
+    ``model_copy(update={...})`` when a change is genuinely intended.
+    """
+
+    model_config = ConfigDict(frozen=True)
 
 
 class RelationType(str, Enum):
@@ -55,7 +67,7 @@ class Status(str, Enum):
     unknown = "unknown"
 
 
-class Company(BaseModel):
+class Company(_Frozen):
     id: str = Field(description="Stable slug, e.g. 'tsmc' or 'nvda'.")
     name: str
     ticker: Optional[str] = None
@@ -71,7 +83,7 @@ class Company(BaseModel):
     note: Optional[str] = None
 
 
-class Evidence(BaseModel):
+class Evidence(_Frozen):
     url: HttpUrl
     publisher: str
     published_at: Optional[date] = Field(
@@ -90,7 +102,7 @@ class Evidence(BaseModel):
     )
 
 
-class ScoreBreakdown(BaseModel):
+class ScoreBreakdown(_Frozen):
     """Every additive term is exposed so a reviewer can re-derive 0-100."""
 
     base: int = Field(ge=0, le=100)
@@ -101,9 +113,19 @@ class ScoreBreakdown(BaseModel):
     penalty: int = 0
     total: int = Field(ge=0, le=100)
     rationale: str = ""
+    newest_evidence_date: Optional[date] = Field(
+        default=None,
+        description="Publication date of the most recent evidence backing the "
+                    "claim; this is the date the recency term is measured against.",
+    )
+    evidence_age_days: Optional[int] = Field(
+        default=None,
+        description="snapshot as_of minus newest_evidence_date, in days. Lets a "
+                    "reviewer check the recency term without re-deriving dates.",
+    )
 
 
-class Relationship(BaseModel):
+class Relationship(_Frozen):
     id: str
     subject: str = Field(description="Company id of the focal entity, e.g. 'nvda'.")
     object_company: str = Field(description="Company id of the counterparty.")
@@ -121,7 +143,7 @@ class Relationship(BaseModel):
     score: Optional[ScoreBreakdown] = None
 
 
-class Snapshot(BaseModel):
+class Snapshot(_Frozen):
     """The frozen, reviewable deliverable.  Serialised to JSON and shipped
     inside the repo so a reviewer never has to re-crawl anything."""
 
