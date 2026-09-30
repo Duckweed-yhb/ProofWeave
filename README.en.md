@@ -112,7 +112,7 @@ python -m venv .venv
 # 2. install (editable) + dev dependencies
 pip install -e ".[dev]"
 
-# 3. run the tests  (should print 114 passed, 1 skipped)
+# 3. run the tests  (should print 115 passed)
 pytest -q
 
 # 4. self-check the snapshot: structure, evidence, and score reproducibility
@@ -125,7 +125,10 @@ uvicorn proofweave.api:app --reload --port 8123
 
 No keys and no `.env` are needed. `.env.example` only matters if you later add a crawler.
 
-> The one skipped test is the `proofweave graph` file-writing case: in a restricted environment that has no writable temporary directory (a low-integrity sandbox, for instance) it skips with a reason instead of pretending to pass.
+> One case -- exporting the graph to a file -- needs a writable temporary directory. In a restricted
+> environment with none (a low-integrity sandbox, for instance) it skips with a reason instead of
+> pretending to pass, and the run prints `114 passed, 1 skipped`. On a normal machine and in CI it is
+> `115 passed`.
 
 ## 3. Command line
 

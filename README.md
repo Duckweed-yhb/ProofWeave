@@ -112,7 +112,7 @@ python -m venv .venv
 # 2. 安装（可编辑模式）+ 开发依赖
 pip install -e ".[dev]"
 
-# 3. 跑测试（应输出 114 passed, 1 skipped）
+# 3. 跑测试（应输出 115 passed）
 pytest -q
 
 # 4. 自检快照：结构、证据、以及"分数确实由公式算出"
@@ -125,7 +125,9 @@ uvicorn proofweave.api:app --reload --port 8123
 
 无需任何密钥或 `.env`。只有当你后续扩展爬虫时才需要参考 `.env.example`。
 
-> 那 1 个 skipped 是 `proofweave graph` 写文件的用例：在无法写入临时目录的受限环境（例如低完整性级别的沙箱）里它会带原因跳过，而不是伪装成通过。
+> 其中「把图导出成文件」的那个用例需要一个可写的临时目录。在无法写入临时目录的受限环境里
+> （例如低完整性级别的沙箱），它会带原因跳过而不是伪装成通过，此时输出为 `114 passed, 1 skipped`。
+> 正常机器和 CI 上都是 `115 passed`。
 
 ## 3. 命令行
 
